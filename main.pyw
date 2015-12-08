@@ -1,9 +1,11 @@
 import threading
 from win32api import *
 from win32gui import *
+from _winreg import *
 import win32con
 import sys, os
 import time
+import win32console,win32gui,ctypes
 
 class WindowsBalloonTip:
     def __init__(self, title, msg):
@@ -52,5 +54,20 @@ def main():
     threading.Timer(600, main).start()
     w=WindowsBalloonTip("Eye Care", "Boss close your eyes for 10 seconds and look some where else :)")
 
+def addStartup():
+    fp=os.path.dirname(os.path.realpath(__file__))
+    file_name=sys.argv[0].split("\\")[-1]
+    new_file_path=fp+"\\"+file_name
+    keyVal= r'Software\Microsoft\Windows\CurrentVersion\Run'
+
+    key2change= OpenKey(HKEY_CURRENT_USER,
+    keyVal,0,KEY_ALL_ACCESS)
+
+    SetValueEx(key2change, "Eye Care",0,REG_SZ, new_file_path)
+
 if __name__ == '__main__':
+    addStartup()
+    window = win32console.GetConsoleWindow()
+    win32gui.ShowWindow(window,0)
+    ctypes.windll.kernel32.SetConsoleTitleA("Eye Care")
     main()
