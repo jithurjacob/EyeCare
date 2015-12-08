@@ -1,3 +1,12 @@
+"""
+Eye Care for Windows
+====================================
+Coded By: Jithu R Jacob <jithurjacob@gmail.com>
+GitHub: https://github.com/jithurjacob/
+
+"""
+
+
 import threading
 from win32api import *
 from win32gui import *
