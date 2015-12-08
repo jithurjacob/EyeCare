@@ -4,7 +4,7 @@ from win32gui import *
 from _winreg import *
 import win32con
 import sys, os
-import time
+import time,random
 import win32console,win32gui,ctypes
 
 class WindowsBalloonTip:
@@ -51,8 +51,16 @@ class WindowsBalloonTip:
     
 
 def main():
-    threading.Timer(600, main).start()
-    w=WindowsBalloonTip("Eye Care", "Boss close your eyes for 10 seconds and look some where else :)")
+    threading.Timer(1200, main).start()
+    data=[
+    "Boss close your eyes for 10 seconds and look some where else :)",
+    "Hey dude, close your eyes",
+    "Relax dude, close your eyes",
+    "Abe yar, relax",
+    "Get up and walk for a minute",
+    "Go and drink some water"
+    ]
+    w=WindowsBalloonTip("Eye Care", random.choice(data))
 
 def addStartup():
     fp=os.path.dirname(os.path.realpath(__file__))
@@ -65,9 +73,12 @@ def addStartup():
 
     SetValueEx(key2change, "Eye Care",0,REG_SZ, new_file_path)
 
-if __name__ == '__main__':
-    addStartup()
+def hide():
     window = win32console.GetConsoleWindow()
     win32gui.ShowWindow(window,0)
     ctypes.windll.kernel32.SetConsoleTitleA("Eye Care")
+
+if __name__ == '__main__':
+    addStartup()
+    hide()
     main()
