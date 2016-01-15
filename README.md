@@ -13,3 +13,7 @@ EyeCare starts with your windows and every 10 minute remind you to relax your ey
 
 ## Usage
 Download the file and run it. Simple as that :)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jithurjacob/eyecare/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
